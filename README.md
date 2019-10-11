@@ -2,7 +2,7 @@
 Maggiori dettagli  qui http://www.raspibo.org/wiki/index.php?title=Introduzione_a_Node-Red
 
 # Video
-Video recordind: https://archive.org/details/introduzione_a_nodered
+Video recording: https://archive.org/details/introduzione_a_nodered
 
 License and copyright
 =====================
