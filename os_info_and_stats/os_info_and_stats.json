@@ -1,0 +1,671 @@
+[
+    {
+        "id": "21b5b8bc.14612",
+        "type": "debug",
+        "z": "9a324111.aff978",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 820,
+        "y": 670,
+        "wires": []
+    },
+    {
+        "id": "f4b8d632.9fc61",
+        "type": "exec",
+        "z": "9a324111.aff978",
+        "command": "cat /sys/class/thermal/thermal_zone0/temp",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 510,
+        "y": 90,
+        "wires": [
+            [
+                "27007f42.d26738"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "da3e9fa0.30fa98",
+        "type": "inject",
+        "z": "9a324111.aff978",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "15",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "f4b8d632.9fc61",
+                "28e56033.7557d",
+                "2f30feb2.427d7a",
+                "30a4ee19.a0fa3a",
+                "bcf84533.c4529",
+                "6318fdaa.f8cd1c"
+            ]
+        ]
+    },
+    {
+        "id": "27007f42.d26738",
+        "type": "function",
+        "z": "9a324111.aff978",
+        "name": "input/1000",
+        "func": "msg.payload=msg.payload/1000;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 160,
+        "wires": [
+            [
+                "89cf0850.4e83f",
+                "88019ae8.3fd878",
+                "75a8a767.beddd"
+            ]
+        ]
+    },
+    {
+        "id": "89cf0850.4e83f",
+        "type": "ui_chart",
+        "z": "9a324111.aff978",
+        "name": "",
+        "group": "d96289b5.5d7bb",
+        "order": 5,
+        "width": "8",
+        "height": "5",
+        "label": "CPU temperature chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "bezier",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 850,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88019ae8.3fd878",
+        "type": "ui_gauge",
+        "z": "9a324111.aff978",
+        "name": "",
+        "group": "d96289b5.5d7bb",
+        "order": 1,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "Cpu temperature",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "20",
+        "max": "80",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "70",
+        "x": 830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5fb33bfd.829c3c",
+        "type": "OS",
+        "z": "9a324111.aff978",
+        "name": "OS",
+        "x": 400,
+        "y": 530,
+        "wires": [
+            [
+                "376a7d75.7ba6f2"
+            ]
+        ]
+    },
+    {
+        "id": "6419c13e.0393",
+        "type": "Drives",
+        "z": "9a324111.aff978",
+        "name": "",
+        "x": 400,
+        "y": 250,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2f30feb2.427d7a",
+        "type": "Uptime",
+        "z": "9a324111.aff978",
+        "name": "",
+        "x": 390,
+        "y": 290,
+        "wires": [
+            [
+                "ef747ed0.c71618"
+            ]
+        ]
+    },
+    {
+        "id": "30a4ee19.a0fa3a",
+        "type": "CPUs",
+        "z": "9a324111.aff978",
+        "name": "",
+        "x": 400,
+        "y": 340,
+        "wires": [
+            [
+                "192bf062.efc948",
+                "247db9e3.5e5536"
+            ]
+        ]
+    },
+    {
+        "id": "28e56033.7557d",
+        "type": "Loadavg",
+        "z": "9a324111.aff978",
+        "name": "",
+        "x": 390,
+        "y": 390,
+        "wires": [
+            [
+                "3cc0e878.97aec8"
+            ]
+        ]
+    },
+    {
+        "id": "bcf84533.c4529",
+        "type": "Memory",
+        "z": "9a324111.aff978",
+        "name": "",
+        "x": 390,
+        "y": 440,
+        "wires": [
+            [
+                "69d453e.7aba32c"
+            ]
+        ]
+    },
+    {
+        "id": "d25d2e95.0bddd",
+        "type": "NetworkIntf",
+        "z": "9a324111.aff978",
+        "name": "",
+        "x": 380,
+        "y": 490,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "247db9e3.5e5536",
+        "type": "debug",
+        "z": "9a324111.aff978",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 790,
+        "y": 250,
+        "wires": []
+    },
+    {
+        "id": "db876940.b92d3",
+        "type": "ui_template",
+        "z": "9a324111.aff978",
+        "group": "d96289b5.5d7bb",
+        "name": "Uptime template",
+        "order": 7,
+        "width": "10",
+        "height": "1",
+        "format": "<div layout=\"row\" layout-align=\"start center\">\n  <span flex>Uptime: {{msg.payload.uptime}}</span>\n</div>\n",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "templateScope": "local",
+        "x": 830,
+        "y": 290,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3cc0e878.97aec8",
+        "type": "ui_template",
+        "z": "9a324111.aff978",
+        "group": "d96289b5.5d7bb",
+        "name": "Loadavg template",
+        "order": 8,
+        "width": "10",
+        "height": "3",
+        "format": "<div layout=\"row\" layout-align=\"start center\">\n  <span flex>Loadavg</span>\n</div>\n<ul ng-repeat=\"record in msg.payload\">\n  <li>1 Min: {{record[0].toFixed(2)}}</li>\n  <li>5 Min: {{record[1].toFixed(2)}}</li>\n  <li>15 Min: {{record[2].toFixed(2)}}</li>\n</ul>\n",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "templateScope": "local",
+        "x": 830,
+        "y": 390,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "192bf062.efc948",
+        "type": "ui_template",
+        "z": "9a324111.aff978",
+        "group": "d96289b5.5d7bb",
+        "name": "CPU template",
+        "order": 4,
+        "width": "10",
+        "height": "3",
+        "format": "<div layout=\"row\" layout-align=\"start center\">\n  <span flex>CPU speed</span>\n</div>\n<ul>\n  <li>CPU0 speed(Mhz): {{msg.payload.cpus[0].speed}}</li>\n  <li>CPU1 speed(Mhz): {{msg.payload.cpus[1].speed}}</li>\n  <li>CPU2 speed(Mhz): {{msg.payload.cpus[2].speed}}</li>\n  <li>CPU3 speed(Mhz): {{msg.payload.cpus[3].speed}}</li>\n</ul>\n",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "templateScope": "local",
+        "x": 820,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f2e3894.e5225f8",
+        "type": "ui_gauge",
+        "z": "9a324111.aff978",
+        "name": "",
+        "group": "d96289b5.5d7bb",
+        "order": 2,
+        "width": "8",
+        "height": "6",
+        "gtype": "gage",
+        "title": "RAM usage",
+        "label": "%",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "80",
+        "seg2": "90",
+        "x": 810,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "69d453e.7aba32c",
+        "type": "function",
+        "z": "9a324111.aff978",
+        "name": "Extract memusage",
+        "func": "msg.payload=msg.payload.memusage;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 440,
+        "wires": [
+            [
+                "f2e3894.e5225f8",
+                "3837215.8f14d5e"
+            ]
+        ]
+    },
+    {
+        "id": "ef747ed0.c71618",
+        "type": "function",
+        "z": "9a324111.aff978",
+        "name": "Seconds_to_hms",
+        "func": "var totalSeconds=msg.payload.uptime;\nvar hours = Math.floor(totalSeconds / 3600);\ntotalSeconds %= 3600;\nvar minutes = Math.floor(totalSeconds / 60);\nvar seconds = totalSeconds % 60;\nmsg.payload.uptime=hours + \":\" + minutes + \":\" + seconds;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 290,
+        "wires": [
+            [
+                "db876940.b92d3"
+            ]
+        ]
+    },
+    {
+        "id": "376a7d75.7ba6f2",
+        "type": "ui_template",
+        "z": "9a324111.aff978",
+        "group": "d96289b5.5d7bb",
+        "name": "OS data template",
+        "order": 3,
+        "width": "10",
+        "height": "3",
+        "format": "<div layout=\"row\" layout-align=\"start center\">\n  <span flex>OS data:</span>\n</div>\n<ul>\n<li>Hostname: {{msg.payload.hostname}}</li>\n<li>Platform: {{msg.payload.platform}}</li>\n<li>Arch:     {{msg.payload.arch}}</li>\n<li>Release:  {{msg.payload.release}}</li>\n</ul>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "templateScope": "local",
+        "x": 830,
+        "y": 530,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3837215.8f14d5e",
+        "type": "ui_chart",
+        "z": "9a324111.aff978",
+        "name": "",
+        "group": "d96289b5.5d7bb",
+        "order": 6,
+        "width": "8",
+        "height": "5",
+        "label": "RAM usage chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "bezier",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 830,
+        "y": 490,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bbad5192.d3e588",
+        "type": "ui_ui_control",
+        "z": "9a324111.aff978",
+        "name": "",
+        "x": 230,
+        "y": 570,
+        "wires": [
+            [
+                "78d217b1.5f20f",
+                "5fb33bfd.829c3c"
+            ]
+        ]
+    },
+    {
+        "id": "78d217b1.5f20f",
+        "type": "debug",
+        "z": "9a324111.aff978",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 810,
+        "y": 570,
+        "wires": []
+    },
+    {
+        "id": "6318fdaa.f8cd1c",
+        "type": "cpu",
+        "z": "9a324111.aff978",
+        "name": "",
+        "msgCore": true,
+        "msgOverall": false,
+        "msgArray": false,
+        "msgTemp": false,
+        "x": 380,
+        "y": 630,
+        "wires": [
+            [
+                "3c707f7f.1330f",
+                "21b5b8bc.14612",
+                "47e97e21.e8c62"
+            ]
+        ]
+    },
+    {
+        "id": "3c707f7f.1330f",
+        "type": "ui_chart",
+        "z": "9a324111.aff978",
+        "name": "",
+        "group": "d96289b5.5d7bb",
+        "order": 8,
+        "width": "26",
+        "height": "10",
+        "label": "CPU usage",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "bezier",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "useOldStyle": false,
+        "outputs": 1,
+        "x": 820,
+        "y": 630,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61adf554.0fc91c",
+        "type": "debug",
+        "z": "9a324111.aff978",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 810,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "373a37af.165928",
+        "type": "inject",
+        "z": "9a324111.aff978",
+        "name": "",
+        "topic": "",
+        "payload": "Started!",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "x": 240,
+        "y": 780,
+        "wires": [
+            [
+                "62632cf2.6a5554"
+            ]
+        ]
+    },
+    {
+        "id": "b08ed77b.7bc3e8",
+        "type": "function",
+        "z": "9a324111.aff978",
+        "name": "",
+        "func": "msg.payload=\"Ip v4: \" + msg.payload[0].address + \" \\rIp v6: \" + msg.payload[1].address ;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 830,
+        "wires": [
+            [
+                "f4e081ee.0644b8"
+            ]
+        ]
+    },
+    {
+        "id": "75a8a767.beddd",
+        "type": "debug",
+        "z": "9a324111.aff978",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 790,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f4e081ee.0644b8",
+        "type": "xmpp out",
+        "z": "9a324111.aff978",
+        "name": "",
+        "server": "e65dcf74.06b89",
+        "to": "sample@jabber.org",
+        "join": false,
+        "sendObject": false,
+        "x": 790,
+        "y": 830,
+        "wires": []
+    },
+    {
+        "id": "efaf80c0.de54d8",
+        "type": "exec",
+        "z": "9a324111.aff978",
+        "command": "espeak  -k30  -vit+4 ",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 830,
+        "y": 900,
+        "wires": [
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8c861f50.60c0d8",
+        "type": "function",
+        "z": "9a324111.aff978",
+        "name": "",
+        "func": "msg.payload=\"\\\"\" + msg.payload[0].address.replace(\".\",\" \") + \"\\\"\" ;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 570,
+        "y": 900,
+        "wires": [
+            [
+                "efaf80c0.de54d8"
+            ]
+        ]
+    },
+    {
+        "id": "62632cf2.6a5554",
+        "type": "hostip",
+        "z": "9a324111.aff978",
+        "name": "Host IP",
+        "x": 390,
+        "y": 780,
+        "wires": [
+            [
+                "61adf554.0fc91c",
+                "b08ed77b.7bc3e8",
+                "8c861f50.60c0d8"
+            ]
+        ]
+    },
+    {
+        "id": "d96289b5.5d7bb",
+        "type": "ui_group",
+        "z": 0,
+        "name": "Raspberry Pi Stat",
+        "tab": "262fcdea.fe0a42",
+        "disp": true,
+        "width": "26",
+        "collapse": false
+    },
+    {
+        "id": "e65dcf74.06b89",
+        "type": "xmpp-server",
+        "z": "",
+        "user": "nodered_course01@jabber.org",
+        "nickname": ""
+    },
+    {
+        "id": "262fcdea.fe0a42",
+        "type": "ui_tab",
+        "z": 0,
+        "name": "OS info and stats",
+        "icon": "fa-line-chart",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    }
+]
