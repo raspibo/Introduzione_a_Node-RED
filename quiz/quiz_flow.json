@@ -56,7 +56,8 @@
         "y": 340,
         "wires": [
             [
-                "91d956e2.1c3c48"
+                "91d956e2.1c3c48",
+                "c9d4697f.d10078"
             ]
         ]
     },
@@ -98,8 +99,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 630,
-        "y": 300,
+        "x": 370,
+        "y": 380,
         "wires": []
     },
     {
@@ -107,7 +108,7 @@
         "type": "function",
         "z": "818e82ff.8b81f8",
         "name": "responses_to_chart_var",
-        "func": "var iot = flow.get(\"iot\") || 0; \nvar game = flow.get(\"game\") || 0; \nvar web = flow.get(\"web\") || 0; \nvar scraping = flow.get(\"scraping\") || 0; \nvar geo = flow.get(\"geo\") || 0; \nvar chat = flow.get(\"chat\") || 0; \nvar social = flow.get(\"social\") || 0; \nvar quiz = flow.get(\"quiz\") || 0; \nvar stl = flow.get(\"stl\") || 0; \nvar flight = flow.get(\"flight\") || 0;\nif (msg.payload.iot) { iot+=parseInt(msg.payload.iot);} \nif (msg.payload.game) { game+=parseInt(msg.payload.game);} \nif (msg.payload.web) { web+=parseInt(msg.payload.web);}\nif (msg.payload.scraping) { scraping+=parseInt(msg.payload.scraping);} \nif (msg.payload.geo) { geo+=parseInt(msg.payload.geo);}\nif (msg.payload.chat) { chat+=parseInt(msg.payload.chat);} \nif (msg.payload.social) { social+=parseInt(msg.payload.social);}\nif (msg.payload.quiz) { social+=parseInt(msg.payload.quiz);}\nif (msg.payload.stl) { social+=parseInt(msg.payload.stl);}\nif (msg.payload.flight) { flight+=parseInt(msg.payload.flight);}\n\nflow.set([\"iot\",\"game\",\"web\",\"scraping\",\"geo\",\"chat\",\"social\",\"quiz\",\"stl\",\"flight\"],[iot,game,web,scraping,geo,chat,social,quiz,stl,flight])\nmsg.payload[\"series\"]= [\"iot\", \"game\",\"web\", \"scraping\",\"geo\",\"chat\",\"social\",\"quiz\",\"stl\",\"flight\"];\nmsg.payload[\"data\"]  = [[iot],[game],[web],[scraping],[geo],[chat],[social],[quiz],[stl],[flight]];\nmsg.payload=[{\n    \"series\": [\"\", \"\", \"\",\"\",\"\",\"\"],\n    \"data\": [[iot,game,web,scraping,geo,chat,social,quiz,stl,flight]],\n    \"labels\": [ \"iot\",\"game\", \"web\", \"scraping\",\"geo\",\"chat\",\"social\",\"quiz\",\"stl\",\"flight\" ]\n}];\nreturn msg;",
+        "func": "var iot = flow.get(\"iot\") || 0; \nvar game = flow.get(\"game\") || 0; \nvar web = flow.get(\"web\") || 0; \nvar scraping = flow.get(\"scraping\") || 0; \nvar geo = flow.get(\"geo\") || 0; \nvar chat = flow.get(\"chat\") || 0; \nvar social = flow.get(\"social\") || 0; \nvar quiz = flow.get(\"quiz\") || 0; \nvar stl = flow.get(\"stl\") || 0; \nvar flight = flow.get(\"flight\") || 0;\nif (msg.payload.iot) { iot+=parseInt(msg.payload.iot);} \nif (msg.payload.game) { game+=parseInt(msg.payload.game);} \nif (msg.payload.web) { web+=parseInt(msg.payload.web);}\nif (msg.payload.scraping) { scraping+=parseInt(msg.payload.scraping);} \nif (msg.payload.geo) { geo+=parseInt(msg.payload.geo);}\nif (msg.payload.chat) { chat+=parseInt(msg.payload.chat);} \nif (msg.payload.social) { social+=parseInt(msg.payload.social);}\nif (msg.payload.quiz) { quiz+=parseInt(msg.payload.quiz);}\nif (msg.payload.stl) { social+=parseInt(msg.payload.stl);}\nif (msg.payload.flight) { flight+=parseInt(msg.payload.flight);}\n\nflow.set([\"iot\",\"game\",\"web\",\"scraping\",\"geo\",\"chat\",\"social\",\"quiz\",\"stl\",\"flight\"],[iot,game,web,scraping,geo,chat,social,quiz,stl,flight])\nmsg.payload[\"series\"]= [\"iot\", \"game\",\"web\", \"scraping\",\"geo\",\"chat\",\"social\",\"quiz\",\"stl\",\"flight\"];\nmsg.payload[\"data\"]  = [[iot],[game],[web],[scraping],[geo],[chat],[social],[quiz],[stl],[flight]];\nmsg.payload=[{\n    \"series\": [\"\", \"\", \"\",\"\",\"\",\"\"],\n    \"data\": [[iot,game,web,scraping,geo,chat,social,quiz,stl,flight]],\n    \"labels\": [ \"iot\",\"game\", \"web\", \"scraping\",\"geo\",\"chat\",\"social\",\"quiz\",\"stl\",\"flight\" ]\n}];\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 430,
@@ -115,7 +116,6 @@
         "wires": [
             [
                 "f395cab1.43b7b8",
-                "c9d4697f.d10078",
                 "4cdb0849.9c7958"
             ]
         ]
