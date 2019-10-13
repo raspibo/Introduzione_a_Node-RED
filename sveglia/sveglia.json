@@ -1,0 +1,831 @@
+[
+    {
+        "id": "7bca5057.ab9fe",
+        "type": "exec",
+        "z": "89c14ae6.3ca678",
+        "command": " termux-dialog confirm -t \"Sveglia\" -i \"Sei sveglio?\"",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "Conferma spegnimento",
+        "x": 1000,
+        "y": 210,
+        "wires": [
+            [
+                "bf0cf8f8.77d768"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "559b9a10.68d43c",
+        "type": "exec",
+        "z": "89c14ae6.3ca678",
+        "command": "termux-media-player play /data/data/com.termux/files/home/storage/shared/Ringtones/gallo.wav",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "Play file",
+        "x": 840,
+        "y": 280,
+        "wires": [
+            [
+                "7bca5057.ab9fe"
+            ],
+            [],
+            [
+                "3dc909f4.760f9e"
+            ]
+        ]
+    },
+    {
+        "id": "150cf6d7.2ba1e9",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 660,
+        "y": 350,
+        "wires": []
+    },
+    {
+        "id": "3dc909f4.760f9e",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1020,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "bde256ac.466a48",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "88fd75fe.94caf",
+        "type": "bigtimer",
+        "z": "89c14ae6.3ca678",
+        "outtopic": "",
+        "outpayload1": "",
+        "outpayload2": "",
+        "name": "Big Timer",
+        "comment": "",
+        "lat": "44.49",
+        "lon": "11.37",
+        "starttime": "420",
+        "endtime": "450",
+        "starttime2": "420",
+        "endtime2": "450",
+        "startoff": "0",
+        "endoff": "0",
+        "startoff2": 0,
+        "endoff2": 0,
+        "offs": 0,
+        "outtext1": "Sveglia_On",
+        "outtext2": "Sveglia_Off",
+        "timeout": 1440,
+        "sun": false,
+        "mon": true,
+        "tue": true,
+        "wed": true,
+        "thu": true,
+        "fri": true,
+        "sat": false,
+        "jan": true,
+        "feb": true,
+        "mar": true,
+        "apr": true,
+        "may": true,
+        "jun": true,
+        "jul": true,
+        "aug": true,
+        "sep": true,
+        "oct": true,
+        "nov": true,
+        "dec": true,
+        "day1": 0,
+        "month1": 0,
+        "day2": 0,
+        "month2": 0,
+        "day3": 0,
+        "month3": 0,
+        "day4": 0,
+        "month4": 0,
+        "day5": 0,
+        "month5": 0,
+        "day6": 0,
+        "month6": 0,
+        "d1": 0,
+        "w1": 0,
+        "d2": 0,
+        "w2": 0,
+        "d3": 0,
+        "w3": 0,
+        "d4": 0,
+        "w4": 0,
+        "d5": 0,
+        "w5": 0,
+        "d6": 0,
+        "w6": 0,
+        "xday1": 0,
+        "xmonth1": 0,
+        "xday2": 0,
+        "xmonth2": 0,
+        "xday3": 0,
+        "xmonth3": 0,
+        "xday4": 0,
+        "xmonth4": 0,
+        "xday5": 0,
+        "xmonth5": 0,
+        "xday6": 0,
+        "xmonth6": 0,
+        "xd1": 0,
+        "xw1": 0,
+        "xd2": 0,
+        "xw2": 0,
+        "xd3": 0,
+        "xw3": 0,
+        "xd4": 0,
+        "xw4": 0,
+        "xd5": 0,
+        "xw5": 0,
+        "xd6": 0,
+        "xw6": 0,
+        "suspend": false,
+        "random": false,
+        "repeat": true,
+        "atstart": false,
+        "odd": false,
+        "even": false,
+        "x": 500,
+        "y": 280,
+        "wires": [
+            [],
+            [
+                "150cf6d7.2ba1e9",
+                "47ffed4d.b70fb4",
+                "c30bae30.6b4128"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "bf0cf8f8.77d768",
+        "type": "json",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 1200,
+        "y": 200,
+        "wires": [
+            [
+                "9265eeea.2b26f8"
+            ]
+        ]
+    },
+    {
+        "id": "9265eeea.2b26f8",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "Decodifica_popup",
+        "func": "if (msg.payload.text == \"yes\") {\n    msg.payload=\"stop\";\n    return [msg,msg];\n} else {\n    return [null,msg];\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 1370,
+        "y": 200,
+        "wires": [
+            [
+                "bde256ac.466a48",
+                "d44f3312.9fa2a"
+            ],
+            [
+                "f598acb9.d3d7e8"
+            ]
+        ]
+    },
+    {
+        "id": "47ffed4d.b70fb4",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "Filtra_messaggi",
+        "func": "if (msg.state == \"ON Auto\") {\n    return msg;    \n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 680,
+        "y": 280,
+        "wires": [
+            [
+                "559b9a10.68d43c"
+            ]
+        ]
+    },
+    {
+        "id": "f598acb9.d3d7e8",
+        "type": "exec",
+        "z": "89c14ae6.3ca678",
+        "command": "termux-media-player stop",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "true",
+        "timer": "",
+        "oldrc": false,
+        "name": "Player stop",
+        "x": 1620,
+        "y": 300,
+        "wires": [
+            [
+                "f4f6b0bf.09f6f8"
+            ],
+            [
+                "954f268e.2b8ab8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "7a27a6a8.b5437",
+        "type": "inject",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "topic": "",
+        "payload": "Stop!",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 1350,
+        "y": 300,
+        "wires": [
+            [
+                "f598acb9.d3d7e8"
+            ]
+        ]
+    },
+    {
+        "id": "f4f6b0bf.09f6f8",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1620,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "954f268e.2b8ab8",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1620,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "18aed123.1700e7",
+        "type": "ui_text_input",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "label": "Ora sveglia",
+        "tooltip": "",
+        "group": "d2da295f.e2a698",
+        "order": 1,
+        "width": "6",
+        "height": "3",
+        "passthru": true,
+        "mode": "time",
+        "delay": "1",
+        "topic": "",
+        "x": 500,
+        "y": 590,
+        "wires": [
+            [
+                "8ab259b7.a3fbd",
+                "bcc5c198.1e475"
+            ]
+        ]
+    },
+    {
+        "id": "cf7e2b17.01562",
+        "type": "ui_text",
+        "z": "89c14ae6.3ca678",
+        "group": "d2da295f.e2a698",
+        "order": 2,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "Ora avvio",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 820,
+        "y": 610,
+        "wires": []
+    },
+    {
+        "id": "9785b5b1.8642b8",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 830,
+        "y": 570,
+        "wires": []
+    },
+    {
+        "id": "8ab259b7.a3fbd",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "func": "msg.payload=\"on_override \" + msg.payload/60000;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 570,
+        "wires": [
+            [
+                "e0c4a46b.5424c",
+                "6003921e.812494"
+            ]
+        ]
+    },
+    {
+        "id": "bcc5c198.1e475",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "func": "hours = Math.floor(msg.payload / 3600000);\nmsg.payload %= 3600000;\nminutes = Math.floor(msg.payload / 60000);\nseconds = msg.payload % 60000;\nmsg.payload= hours + \":\" + minutes + \":\" + seconds;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 610,
+        "wires": [
+            [
+                "cf7e2b17.01562",
+                "9785b5b1.8642b8"
+            ]
+        ]
+    },
+    {
+        "id": "f9e8d229.1f8ef8",
+        "type": "ui_text_input",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "label": "Ora stop forzato",
+        "tooltip": "",
+        "group": "d2da295f.e2a698",
+        "order": 1,
+        "width": "6",
+        "height": "3",
+        "passthru": true,
+        "mode": "time",
+        "delay": "1",
+        "topic": "",
+        "x": 510,
+        "y": 790,
+        "wires": [
+            [
+                "a146c9e0.450a9",
+                "1bc890e.055dd6f"
+            ]
+        ]
+    },
+    {
+        "id": "623ffad4.dfb664",
+        "type": "ui_text",
+        "z": "89c14ae6.3ca678",
+        "group": "d2da295f.e2a698",
+        "order": 2,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "Ora stop forzato",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 840,
+        "y": 810,
+        "wires": []
+    },
+    {
+        "id": "9659d811.9f057",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 830,
+        "y": 770,
+        "wires": []
+    },
+    {
+        "id": "a146c9e0.450a9",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "func": "msg.payload=\"off_override \" + msg.payload/60000;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 770,
+        "wires": [
+            [
+                "9659d811.9f057",
+                "e0c4a46b.5424c",
+                "e91e88b0.2ad28"
+            ]
+        ]
+    },
+    {
+        "id": "1bc890e.055dd6f",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "func": "hours = Math.floor(msg.payload / 3600000);\nmsg.payload %= 3600000;\nminutes = Math.floor(msg.payload / 60000);\nseconds = msg.payload % 60000;\nmsg.payload= hours + \":\" + minutes + \":\" + seconds;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 810,
+        "wires": [
+            [
+                "623ffad4.dfb664"
+            ]
+        ]
+    },
+    {
+        "id": "f18f7ae8.9283a",
+        "type": "inject",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "topic": "",
+        "payload": "auto",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 450,
+        "y": 130,
+        "wires": [
+            [
+                "aa1a151e.0e547"
+            ]
+        ]
+    },
+    {
+        "id": "14c6c37b.a6b76d",
+        "type": "ui_text",
+        "z": "89c14ae6.3ca678",
+        "group": "d2da295f.e2a698",
+        "order": 2,
+        "width": "6",
+        "height": "2",
+        "name": "",
+        "label": "Stato timer",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 830,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "c30bae30.6b4128",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "func": "msg.payload=msg.extState;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 660,
+        "y": 860,
+        "wires": [
+            [
+                "14c6c37b.a6b76d"
+            ]
+        ]
+    },
+    {
+        "id": "6ef97253.da8774",
+        "type": "function",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "func": "msg.payload=\"auto\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 1000,
+        "y": 730,
+        "wires": [
+            [
+                "de112078.d0a9f8"
+            ]
+        ]
+    },
+    {
+        "id": "e0c4a46b.5424c",
+        "type": "delay",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 820,
+        "y": 730,
+        "wires": [
+            [
+                "6ef97253.da8774"
+            ]
+        ]
+    },
+    {
+        "id": "7ce8b272.059ff4",
+        "type": "comment",
+        "z": "89c14ae6.3ca678",
+        "name": "Interfaccia dashboard",
+        "info": "",
+        "x": 1040,
+        "y": 630,
+        "wires": []
+    },
+    {
+        "id": "aa1a151e.0e547",
+        "type": "bigtimer",
+        "z": "89c14ae6.3ca678",
+        "outtopic": "",
+        "outpayload1": "",
+        "outpayload2": "",
+        "name": "Reimposta timer",
+        "comment": "",
+        "lat": "44.49",
+        "lon": "11.37",
+        "starttime": "0",
+        "endtime": "720",
+        "starttime2": "1020",
+        "endtime2": "1080",
+        "startoff": 0,
+        "endoff": 0,
+        "startoff2": 0,
+        "endoff2": 0,
+        "offs": 0,
+        "outtext1": "auto",
+        "outtext2": "auto",
+        "timeout": 1440,
+        "sun": false,
+        "mon": true,
+        "tue": true,
+        "wed": true,
+        "thu": true,
+        "fri": true,
+        "sat": false,
+        "jan": true,
+        "feb": true,
+        "mar": true,
+        "apr": true,
+        "may": true,
+        "jun": true,
+        "jul": true,
+        "aug": true,
+        "sep": true,
+        "oct": true,
+        "nov": true,
+        "dec": true,
+        "day1": 0,
+        "month1": 0,
+        "day2": 0,
+        "month2": 0,
+        "day3": 0,
+        "month3": 0,
+        "day4": 0,
+        "month4": 0,
+        "day5": 0,
+        "month5": 0,
+        "day6": 0,
+        "month6": 0,
+        "d1": 0,
+        "w1": 0,
+        "d2": 0,
+        "w2": 0,
+        "d3": 0,
+        "w3": 0,
+        "d4": 0,
+        "w4": 0,
+        "d5": 0,
+        "w5": 0,
+        "d6": 0,
+        "w6": 0,
+        "xday1": 0,
+        "xmonth1": 0,
+        "xday2": 0,
+        "xmonth2": 0,
+        "xday3": 0,
+        "xmonth3": 0,
+        "xday4": 0,
+        "xmonth4": 0,
+        "xday5": 0,
+        "xmonth5": 0,
+        "xday6": 0,
+        "xmonth6": 0,
+        "xd1": 0,
+        "xw1": 0,
+        "xd2": 0,
+        "xw2": 0,
+        "xd3": 0,
+        "xw3": 0,
+        "xd4": 0,
+        "xw4": 0,
+        "xd5": 0,
+        "xw5": 0,
+        "xd6": 0,
+        "xw6": 0,
+        "suspend": false,
+        "random": false,
+        "repeat": true,
+        "atstart": true,
+        "odd": false,
+        "even": false,
+        "x": 640,
+        "y": 130,
+        "wires": [
+            [],
+            [],
+            [
+                "a010df8e.b61188",
+                "88fd75fe.94caf"
+            ]
+        ]
+    },
+    {
+        "id": "4d67ad7e.e20b44",
+        "type": "link in",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "links": [
+            "e91e88b0.2ad28",
+            "de112078.d0a9f8",
+            "6003921e.812494",
+            "d44f3312.9fa2a"
+        ],
+        "x": 345,
+        "y": 280,
+        "wires": [
+            [
+                "88fd75fe.94caf"
+            ]
+        ]
+    },
+    {
+        "id": "e91e88b0.2ad28",
+        "type": "link out",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "links": [
+            "4d67ad7e.e20b44"
+        ],
+        "x": 655,
+        "y": 710,
+        "wires": []
+    },
+    {
+        "id": "de112078.d0a9f8",
+        "type": "link out",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "links": [
+            "4d67ad7e.e20b44"
+        ],
+        "x": 1160,
+        "y": 730,
+        "wires": []
+    },
+    {
+        "id": "6003921e.812494",
+        "type": "link out",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "links": [
+            "4d67ad7e.e20b44"
+        ],
+        "x": 830,
+        "y": 530,
+        "wires": []
+    },
+    {
+        "id": "d44f3312.9fa2a",
+        "type": "link out",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "links": [
+            "4d67ad7e.e20b44"
+        ],
+        "x": 1515,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a010df8e.b61188",
+        "type": "debug",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 890,
+        "y": 130,
+        "wires": []
+    },
+    {
+        "id": "7c102e0e.e4637",
+        "type": "ui_button",
+        "z": "89c14ae6.3ca678",
+        "name": "",
+        "group": "d2da295f.e2a698",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Spegni ora",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "icon": "",
+        "payload": "Stop!",
+        "payloadType": "str",
+        "topic": "",
+        "x": 1370,
+        "y": 360,
+        "wires": [
+            [
+                "f598acb9.d3d7e8"
+            ]
+        ]
+    },
+    {
+        "id": "d2da295f.e2a698",
+        "type": "ui_group",
+        "z": "",
+        "name": "Sveglia!",
+        "tab": "a9aa1b35.23ced8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "a9aa1b35.23ced8",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Sveglia!",
+        "icon": "fa-fire",
+        "disabled": false,
+        "hidden": false
+    }
+]
