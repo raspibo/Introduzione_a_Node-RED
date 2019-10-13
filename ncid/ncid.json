@@ -1,0 +1,302 @@
+[
+    {
+        "id": "58a09d4e.de19e4",
+        "type": "tcp in",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "server": "client",
+        "host": "localhost",
+        "port": "3333",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "\\n",
+        "topic": "call_log",
+        "base64": false,
+        "x": 190,
+        "y": 150,
+        "wires": [
+            [
+                "b85bf2c8.6ba8c8",
+                "b949a8f0.deeb5",
+                "89481678.7fafd8"
+            ]
+        ]
+    },
+    {
+        "id": "3f0e6225.8f044e",
+        "type": "debug",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 540,
+        "y": 190,
+        "wires": []
+    },
+    {
+        "id": "b949a8f0.deeb5",
+        "type": "switch",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^CIDLOG:.*$",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "^HUPLOG:.*$",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 100,
+        "y": 300,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "b85bf2c8.6ba8c8",
+        "type": "debug",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 530,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "87926eb6.cd6ab",
+        "type": "ui_table",
+        "z": "b566e234.b8ce48",
+        "group": "5217e326.319d2c",
+        "name": "Table",
+        "order": 2,
+        "width": "23",
+        "height": "26",
+        "columns": [
+            {
+                "field": "ACTION_F",
+                "title": "azione",
+                "width": "10%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "DATE_F",
+                "title": "data",
+                "width": "10%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "TIME_F",
+                "title": "ora",
+                "width": "7%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "NMBR_F",
+                "title": "numero",
+                "width": "10%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "NAME_F",
+                "title": "nome",
+                "width": "10%",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "REP_1_URL",
+                "title": "Info elenco",
+                "width": "53%",
+                "align": "left",
+                "formatter": "html",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 1,
+        "cts": true,
+        "x": 700,
+        "y": 560,
+        "wires": [
+            [
+                "83d4a323.20df8"
+            ]
+        ]
+    },
+    {
+        "id": "43f6a120.e121f",
+        "type": "debug",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 800,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "89481678.7fafd8",
+        "type": "csv to json ext",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "version": "0.1",
+        "source": "payload",
+        "delimiter": "*",
+        "quote": "\"",
+        "escape": "\"",
+        "ignoreEmpty": false,
+        "checkType": false,
+        "trim": false,
+        "noheader": true,
+        "includeColumns": "0,2,4,8,6,10,12",
+        "headers": "\"ACTION_F\",\"DATE_H\",\"DATE_F\",\"TIME_H\",\"TIME_F\",\"LINE_H\",\"LINE_F\",\"NMBR_H\",\"NMBR_F\",\"MESG_H\",\"MESG_F\",\"NAME_H\",\"NAME_F\"",
+        "debug": true,
+        "x": 290,
+        "y": 280,
+        "wires": [
+            [
+                "637fbbd2.aac86c"
+            ]
+        ]
+    },
+    {
+        "id": "637fbbd2.aac86c",
+        "type": "function",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "func": "if (msg.payload[0].ACTION_F==\"HUPLOG: \" || msg.payload[0].ACTION_F==\"CIDLOG: \") {\n    msg.payload[0].TIME_F=msg.payload[0].TIME_F.replace(/(..)(..)/,'$1:$2');\n    msg.payload[0].DATE_F=msg.payload[0].DATE_F.replace(/(..)(..)(....)/,'$3/$1/$2');\n    msg.payload[0].REP_1_URL =\"<a target=_new href='http://www.inelenco.com/?dir=cerca&cerca=\" + msg.payload[0].NMBR_F + \"'>Inelenco</a> - \";\n    msg.payload[0].REP_1_URL+=\"<a target=_new href='https://www.tellows.it/num/\" + msg.payload[0].NMBR_F + \"'>Tellows</a> - \";\n    msg.payload[0].REP_1_URL+=\"<a target=_new href='http://it.unknownphone.com/search.php?num=\" + msg.payload[0].NMBR_F+ \"'>it.unknownphone</a> - \";\n    msg.payload[0].REP_1_URL+=\"<a target=_new href='https://www.chistachiamando.it/numero-telefono/\" + msg.payload[0].NMBR_F+ \"'>chistachiamando</a> - \";\n    msg.payload[0].REP_1_URL+=\"<a target=_new href='https://it.unknowndial.com/numero/\" + msg.payload[0].NMBR_F+ \"'>it.unknowndial</a>\";\n    return msg;    \n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 410,
+        "y": 340,
+        "wires": [
+            [
+                "3f0e6225.8f044e",
+                "e4517046.ccebd"
+            ]
+        ]
+    },
+    {
+        "id": "e4517046.ccebd",
+        "type": "join",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "mode": "custom",
+        "build": "array",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "3",
+        "count": "20",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 480,
+        "y": 450,
+        "wires": [
+            [
+                "c3c54410.1db7c8"
+            ]
+        ]
+    },
+    {
+        "id": "c3c54410.1db7c8",
+        "type": "function",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "func": "    for (x=0; x < msg.payload.length; x++) {\n        msg.payload[x]=msg.payload[x][0];\n    }\n    return msg;    \n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 400,
+        "wires": [
+            [
+                "43f6a120.e121f",
+                "87926eb6.cd6ab"
+            ]
+        ]
+    },
+    {
+        "id": "83d4a323.20df8",
+        "type": "debug",
+        "z": "b566e234.b8ce48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 810,
+        "y": 470,
+        "wires": []
+    },
+    {
+        "id": "5217e326.319d2c",
+        "type": "ui_group",
+        "z": "",
+        "name": "Ncid",
+        "tab": "b2539f77.9c6248",
+        "disp": true,
+        "width": "23",
+        "collapse": true
+    },
+    {
+        "id": "b2539f77.9c6248",
+        "type": "ui_tab",
+        "z": "",
+        "name": "Ncid",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
