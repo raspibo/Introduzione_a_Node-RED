@@ -1,0 +1,144 @@
+[
+    {
+        "id": "784768b9.6aa51",
+        "type": "tab",
+        "label": "Flight radar 24",
+        "disabled": false,
+        "info": "Attenzione va modificato il file node.js seguendo queste indicazioni\n\nhttps://github.com/zuhito/node-red-contrib-flightradar24/issues/2\n\n\ncd /home/pi/Programmi/\ngit clone https://github.com/zuhito/node-red-contrib-flightradar24/\ncd node-red-contrib-flightradar24\nvim node.js\nnpm install /home/pi/Programmi/node-red-contrib-flightradar24\nrestartare nodered"
+    },
+    {
+        "id": "25c57b5a.2495c4",
+        "type": "inject",
+        "z": "784768b9.6aa51",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "30",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "fdca01c1.f8c6c"
+            ]
+        ]
+    },
+    {
+        "id": "99574c73.0220b",
+        "type": "debug",
+        "z": "784768b9.6aa51",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 510,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a2e91f5b.68aad8",
+        "type": "worldmap",
+        "z": "784768b9.6aa51",
+        "name": "flight",
+        "lat": "44.49",
+        "lon": "11.37",
+        "zoom": "9",
+        "layer": "Esri Dark Grey",
+        "cluster": "",
+        "maxage": "0",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "hiderightclick": "false",
+        "coords": "dms",
+        "path": "/flight",
+        "x": 1070,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "fdca01c1.f8c6c",
+        "type": "flightradar24",
+        "z": "784768b9.6aa51",
+        "lat": "44.49",
+        "latType": "num",
+        "lon": "11.37",
+        "lonType": "num",
+        "name": "flights",
+        "x": 490,
+        "y": 340,
+        "wires": [
+            [
+                "525e1b7a.633f5c"
+            ]
+        ]
+    },
+    {
+        "id": "7c2d0c4.aa194f4",
+        "type": "worldmap in",
+        "z": "784768b9.6aa51",
+        "name": "",
+        "path": "/flight",
+        "events": "all",
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "7d956540.38e83c"
+            ]
+        ]
+    },
+    {
+        "id": "7d956540.38e83c",
+        "type": "function",
+        "z": "784768b9.6aa51",
+        "name": "",
+        "func": "if ( msg.payload.action==\"connected\" ) {\nmsg.payload=1;\nreturn msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 340,
+        "wires": [
+            [
+                "fdca01c1.f8c6c",
+                "99574c73.0220b"
+            ]
+        ]
+    },
+    {
+        "id": "525e1b7a.633f5c",
+        "type": "function",
+        "z": "784768b9.6aa51",
+        "name": "Add data to map",
+        "func": "//msg.payload.layer=msg.payload.flight;\nmsg.payload.layer=\"Flights\";\nmsg.payload.label=msg.payload.flight;\nvar colore=msg.payload.altitude*1000;\ncolore=\"000000\" +colore.toString(16);\nmsg.payload.iconColor=\"#\"+( colore.substring(colore.length - 6, colore.length));\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 670,
+        "y": 340,
+        "wires": [
+            [
+                "a2e91f5b.68aad8",
+                "c689f53e.327f78"
+            ]
+        ]
+    },
+    {
+        "id": "c689f53e.327f78",
+        "type": "debug",
+        "z": "784768b9.6aa51",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 870,
+        "y": 260,
+        "wires": []
+    }
+]
