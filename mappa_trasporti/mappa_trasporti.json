@@ -1,0 +1,632 @@
+[
+    {
+        "id": "3a1f83cb.7368a4",
+        "type": "csv",
+        "z": "f6388ff2.b7ef68",
+        "name": "elenco_fermate",
+        "sep": ";",
+        "hdrin": false,
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "codice,name,ubicazione,comune,coordinata_x,coordinata_y,lat,lon,layer",
+        "skip": "1",
+        "x": 260,
+        "y": 560,
+        "wires": [
+            [
+                "e287b72.41979c8"
+            ]
+        ]
+    },
+    {
+        "id": "158472d7.51ad7d",
+        "type": "change",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": ",",
+                "fromt": "str",
+                "to": ".",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 500,
+        "wires": [
+            [
+                "3a1f83cb.7368a4"
+            ]
+        ]
+    },
+    {
+        "id": "ea2afc0f.d91d98",
+        "type": "http request",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "https://solweb.tper.it/web/tools/open-data/open-data-download.aspx?source=solweb.tper.it&filename=opendata-versione&version=1&format=csv",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "4226da1e.813cc4"
+            ]
+        ]
+    },
+    {
+        "id": "4226da1e.813cc4",
+        "type": "csv",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "sep": ";",
+        "hdrin": true,
+        "hdrout": "",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "608d30e1.c11098"
+            ]
+        ]
+    },
+    {
+        "id": "608d30e1.c11098",
+        "type": "function",
+        "z": "f6388ff2.b7ef68",
+        "name": "Ricava url pagina",
+        "func": "if (msg.payload.nome_file == \"fermate\") {\n    msg.url=\"https://solweb.tper.it/web/tools/open-data/open-data-download.aspx?source=solweb.tper.it&filename=\" + msg.payload.nome_file + \"&version=\" + msg.payload.versione + \"&format=csv\";\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "4e3573ce.2cbcb4"
+            ]
+        ]
+    },
+    {
+        "id": "4e3573ce.2cbcb4",
+        "type": "http request",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "",
+        "tls": "",
+        "proxy": "",
+        "authType": "basic",
+        "x": 250,
+        "y": 440,
+        "wires": [
+            [
+                "158472d7.51ad7d"
+            ]
+        ]
+    },
+    {
+        "id": "7b7b38a2.61bb1",
+        "type": "function",
+        "z": "f6388ff2.b7ef68",
+        "name": "Filtra zona 500",
+        "func": "if (msg.payload.layer == 500) {\n    msg.payload.name=msg.payload.codice + \"-\" + msg.payload.name;\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 260,
+        "y": 680,
+        "wires": [
+            [
+                "f3309e8c.7f38f8"
+            ]
+        ]
+    },
+    {
+        "id": "10e5ad55.ebb73b",
+        "type": "change",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload.coordinata_x",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.coordinata_y",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.contextmenu",
+                "pt": "msg",
+                "to": "<input name=\"slide1\" type=\"range\" min=\"1\" max=\"100\" value=\"50\" onchange=\\'feedback(this.name,this.value)\\' style=\"width:250px;\">",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67a36d32.e7d09c",
+        "type": "function",
+        "z": "f6388ff2.b7ef68",
+        "name": "f_Tper_HelloBus",
+        "func": "hours = ('0' + new Date().getHours()).slice(-2);\nmins  = ('0' + new Date().getMinutes()).slice(-2);\nmsg = { \n     payload: \n       { \n       'fermata' : msg.payload.fermata,\n       'oraHHMM': hours + mins,\n       'linea' : null\n       }, \n     headers: \n       { \n       'Content-Type': 'application/x-www-form-urlencoded' \n       } \n     }; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 850,
+        "y": 320,
+        "wires": [
+            [
+                "828b07c.7ceb8f8"
+            ]
+        ]
+    },
+    {
+        "id": "828b07c.7ceb8f8",
+        "type": "http request",
+        "z": "f6388ff2.b7ef68",
+        "name": "Tper_HelloBus",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://hellobuswsweb.tper.it/web-services/hello-bus.asmx/QueryHellobus",
+        "tls": "",
+        "x": 840,
+        "y": 380,
+        "wires": [
+            [
+                "f6f66aa9.d45128"
+            ]
+        ]
+    },
+    {
+        "id": "f6f66aa9.d45128",
+        "type": "xml",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "property": "payload",
+        "attr": "",
+        "chr": "ProssimiBus",
+        "x": 810,
+        "y": 440,
+        "wires": [
+            [
+                "beb736e.e7ed2c8",
+                "7886f568.9194bc",
+                "dfe3c4d5.8423c8"
+            ]
+        ]
+    },
+    {
+        "id": "a5184be5.53f0d",
+        "type": "http in",
+        "z": "f6388ff2.b7ef68",
+        "name": "Tper prossime corse",
+        "url": "tper_prossime_corse",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 860,
+        "y": 200,
+        "wires": [
+            [
+                "58dd786d.23f92",
+                "a16a43c0.108028"
+            ]
+        ]
+    },
+    {
+        "id": "1e7661c.5b5039e",
+        "type": "http response",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 810,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "58dd786d.23f92",
+        "type": "change",
+        "z": "f6388ff2.b7ef68",
+        "name": "save req and res",
+        "rules": [
+            {
+                "t": "set",
+                "p": "req",
+                "pt": "flow",
+                "to": "req",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "res",
+                "pt": "flow",
+                "to": "res",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 260,
+        "wires": [
+            [
+                "67a36d32.e7d09c"
+            ]
+        ]
+    },
+    {
+        "id": "62a7e15a.5910a8",
+        "type": "change",
+        "z": "f6388ff2.b7ef68",
+        "name": "get req, res",
+        "rules": [
+            {
+                "t": "set",
+                "p": "req",
+                "pt": "msg",
+                "to": "req",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "res",
+                "pt": "msg",
+                "to": "res",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 560,
+        "wires": [
+            [
+                "bea7281d.095d6",
+                "4f4cc02.c36024"
+            ]
+        ]
+    },
+    {
+        "id": "a16a43c0.108028",
+        "type": "debug",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "res",
+        "targetType": "msg",
+        "x": 1080,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "cd231b05.f7b538",
+        "type": "debug",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 1270,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "beb736e.e7ed2c8",
+        "type": "change",
+        "z": "f6388ff2.b7ef68",
+        "name": "set complete",
+        "rules": [
+            {
+                "t": "set",
+                "p": "complete",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 830,
+        "y": 500,
+        "wires": [
+            [
+                "62a7e15a.5910a8"
+            ]
+        ]
+    },
+    {
+        "id": "bea7281d.095d6",
+        "type": "debug",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "res",
+        "targetType": "msg",
+        "x": 1100,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "4f4cc02.c36024",
+        "type": "template",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n<title>Node red info</title>\n<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\">\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\">\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>\n<script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\"></script>\n<style>\n\t.bs-example{\n    \tmargin: 20px;\n    }\n</style>\n</head>\n<body>\n<div class=\"bs-example\"> \n    <div class=\"alert alert-success alert-dismissible fade show\">\n        <span class=\"fa fa-bus\"></span> - {{payload.string.ProssimiBus}}</i>\n        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" onclick=\"window.close();\">&times;</button>\n    </div>\n</div>\n</body>\n</html>                            ",
+        "output": "str",
+        "x": 820,
+        "y": 640,
+        "wires": [
+            [
+                "1e7661c.5b5039e"
+            ]
+        ]
+    },
+    {
+        "id": "41a20d05.eed8fc",
+        "type": "debug",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 590,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3f9cc2bf.2e4abe",
+        "type": "debug",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 570,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "7886f568.9194bc",
+        "type": "function",
+        "z": "f6388ff2.b7ef68",
+        "name": "inject_data",
+        "func": "var ProssimiBus = msg.payload.string.ProssimiBus;\nvar fermata=flow.get(\"fermata\");\nvar name=flow.get(\"name\");\nmsg.payload = { \"command\": { \"layer\":\"OSM\"}};\nmsg.payload.command = { \"button\": { \"name\": fermata + \" \" + ProssimiBus , \"position\":\"bottomright\", \"icon\": \"fa-info\" } };\n//msg.payload={ \"name\": { \"name\": name, \"tooltip\": fermata + \" \" + ProssimiBus }};\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 590,
+        "y": 640,
+        "wires": [
+            [
+                "f3309e8c.7f38f8",
+                "3f9cc2bf.2e4abe"
+            ]
+        ]
+    },
+    {
+        "id": "d774f8f7.d46758",
+        "type": "function",
+        "z": "f6388ff2.b7ef68",
+        "name": "click_event_filter",
+        "func": "if (msg.payload.action==\"click\") {\n    msg.payload.fermata=msg.payload.name.match(/^[0-9]*[^-]/g)[0];\n    flow.set(\"fermata\",msg.payload.fermata);\n    flow.set(\"name\",msg.payload.name);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 610,
+        "y": 280,
+        "wires": [
+            [
+                "67a36d32.e7d09c",
+                "bff53948.dade38"
+            ]
+        ]
+    },
+    {
+        "id": "e287b72.41979c8",
+        "type": "change",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload.coordinata_x",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload.coordinata_y",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.weblink.url",
+                "pt": "msg",
+                "to": "../tper_prossime_corse?fermata=xxxxx",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.weblink.url",
+                "pt": "msg",
+                "from": "xxxxx",
+                "fromt": "str",
+                "to": "payload.codice",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload.weblink.target",
+                "pt": "msg",
+                "to": "_new",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload.weblink.name",
+                "pt": "msg",
+                "to": "Prossime_corse",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 620,
+        "wires": [
+            [
+                "7b7b38a2.61bb1"
+            ]
+        ]
+    },
+    {
+        "id": "bff53948.dade38",
+        "type": "debug",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 570,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "7a8716d3.f43f9",
+        "type": "play audio",
+        "z": "f6388ff2.b7ef68",
+        "name": "",
+        "voice": "27",
+        "x": 1270,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "dfe3c4d5.8423c8",
+        "type": "change",
+        "z": "f6388ff2.b7ef68",
+        "name": "payload.string.ProssimiBus",
+        "rules": [
+            {
+                "t": "move",
+                "p": "payload.string.ProssimiBus",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 440,
+        "wires": [
+            [
+                "cd231b05.f7b538"
+            ]
+        ]
+    },
+    {
+        "id": "f3309e8c.7f38f8",
+        "type": "worldmap",
+        "z": "f6388ff2.b7ef68",
+        "name": "worldmap_tper",
+        "lat": "44.493",
+        "lon": "11.373",
+        "zoom": "18",
+        "layer": "OSM",
+        "cluster": "19",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "show",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "true",
+        "coords": "none",
+        "path": "/tper",
+        "x": 260,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "6dac5ef0.f7f178",
+        "type": "worldmap in",
+        "z": "f6388ff2.b7ef68",
+        "name": "tper_in",
+        "path": "/tper",
+        "x": 230,
+        "y": 200,
+        "wires": [
+            [
+                "ea2afc0f.d91d98",
+                "d774f8f7.d46758",
+                "41a20d05.eed8fc"
+            ]
+        ]
+    }
+]
