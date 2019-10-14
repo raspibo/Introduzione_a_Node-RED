@@ -1,8 +1,15 @@
 [
     {
-        "id": "d7f09944.485ac8",
+        "id": "b22083fb.2b213",
+        "type": "tab",
+        "label": "mail",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "dd9e3891.bcdc18",
         "type": "inject",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "name": "",
         "topic": "1",
         "payload": "",
@@ -12,37 +19,37 @@
         "once": false,
         "onceDelay": 0.1,
         "x": 90,
-        "y": 100,
+        "y": 80,
         "wires": [
             [
-                "acae8121.3ae5b8"
+                "f632412d.5ef1c"
             ]
         ]
     },
     {
-        "id": "acae8121.3ae5b8",
+        "id": "f632412d.5ef1c",
         "type": "function",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "name": "Check_week_day_of_month",
-        "func": "function weekAndDay(date) {\n    \n    var days = ['Domenica','Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato'],\n        prefixes = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto'];\n\n    return prefixes[Math.floor(date.getDate() / 7)] + ' ' + days[date.getDay()] + ' del mese';\n}\n//if (msg.payload==1) {\n    var today = new Date();\n    var messaggio = weekAndDay(today);\n    var azione ;\n    if (messaggio == \"Secondo Martedi del mese\" || messaggio == \"Quarto Martedi del mese\") {\n        azione= \"Newsletter!\";\n    }\n    var prima_uscita;\n    prima_uscita={ payload:messaggio };\n    var seconda_uscita;\n    seconda_uscita={ payload:azione };\n    if (azione==\"Newsletter!\") {\n        msg=[prima_uscita,seconda_uscita];\n    } else {\n        msg=prima_uscita;\n    }\n    return msg;\n//}",
+        "func": "function weekAndDay(date) {\n    var dateobj = new Date('November 15, 2019 05:35:32');\n    var days = ['Domenica','Lunedi','Martedi','Mercoledi','Giovedi','Venerdi','Sabato'],\n        prefixes = ['Primo', 'Secondo', 'Terzo', 'Quarto', 'Quinto'];\n\n    return prefixes[Math.floor((date.getDate()-1)/7)] + ' ' + days[date.getDay()] + ' del mese';\n}\n//if (msg.payload==1) {\n    var today = new Date();\n    var messaggio = weekAndDay(today);\n    var azione ;\n    if (messaggio == \"Secondo Martedi del mese\" || messaggio == \"Quarto Martedi del mese\") {\n        azione= \"Newsletter!\";\n    }\n    var prima_uscita;\n    prima_uscita={ payload:messaggio };\n    var seconda_uscita;\n    seconda_uscita={ payload:azione };\n    if (azione==\"Newsletter!\") {\n        msg=[prima_uscita,seconda_uscita];\n    } else {\n        msg=prima_uscita;\n    }\n    return msg;\n//}",
         "outputs": 2,
         "noerr": 0,
-        "x": 380,
-        "y": 100,
+        "x": 320,
+        "y": 80,
         "wires": [
             [
-                "35fb3a42.db3176"
+                "6a12de84.1352c"
             ],
             [
-                "f798c264.d94a48",
-                "fef6e2b8.3db56"
+                "56f2c396.4d319c",
+                "a3a0bf43.42ba6"
             ]
         ]
     },
     {
-        "id": "35fb3a42.db3176",
+        "id": "6a12de84.1352c",
         "type": "debug",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -50,14 +57,14 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 650,
-        "y": 80,
+        "x": 590,
+        "y": 60,
         "wires": []
     },
     {
-        "id": "f798c264.d94a48",
+        "id": "56f2c396.4d319c",
         "type": "debug",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -65,14 +72,14 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 650,
-        "y": 120,
+        "x": 590,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "9b6af053.f8e8a8",
+        "id": "a235273e.081368",
         "type": "bigtimer",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "outtopic": "",
         "outpayload1": "1",
         "outpayload2": "0",
@@ -164,58 +171,59 @@
         "odd": false,
         "even": false,
         "x": 100,
-        "y": 200,
+        "y": 180,
         "wires": [
             [
-                "acae8121.3ae5b8",
-                "e486de4.3f010a"
+                "f632412d.5ef1c",
+                "168207.a0fa3df9"
             ],
             [],
             []
         ]
     },
     {
-        "id": "773a1cea.796fb4",
+        "id": "a0e6b4a8.a16dd8",
         "type": "e-mail",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "server": "smtp.mail.org",
         "port": "465",
         "secure": true,
         "tls": true,
-        "name": "someone@mail.org",
+        "name": "danielamazza@gmail.com",
         "dname": "",
-        "x": 960,
-        "y": 160,
+        "x": 830,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "fef6e2b8.3db56",
+        "id": "a3a0bf43.42ba6",
         "type": "function",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "name": "Mail_message",
         "func": "msg.topic = \"Mail subject\";\nmsg.payload = \"Mail first line\" +\nmsg.payload + \n\" Mail body\";\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 660,
-        "y": 160,
+        "x": 600,
+        "y": 140,
         "wires": [
             [
-                "773a1cea.796fb4"
+                "a0e6b4a8.a16dd8"
             ]
         ]
     },
     {
-        "id": "e486de4.3f010a",
+        "id": "168207.a0fa3df9",
         "type": "debug",
-        "z": "c52a6891.e4b1b",
+        "z": "b22083fb.2b213",
         "name": "",
         "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "payload",
+        "targetType": "msg",
         "x": 310,
-        "y": 200,
+        "y": 180,
         "wires": []
     }
 ]
