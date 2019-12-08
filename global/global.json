@@ -1,0 +1,235 @@
+[
+    {
+        "id": "ef96b45d.06e6a8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ce14340d.b37278",
+        "type": "random",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "low": "1",
+        "high": "10",
+        "inte": "true",
+        "property": "payload",
+        "x": 260,
+        "y": 160,
+        "wires": [
+            [
+                "53d8513b.0a207"
+            ]
+        ]
+    },
+    {
+        "id": "390890c7.5379d",
+        "type": "http in",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "url": "/time",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 40,
+        "wires": [
+            [
+                "8ba6963.13f8068"
+            ]
+        ]
+    },
+    {
+        "id": "8ba6963.13f8068",
+        "type": "function",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "func": "// Create a Date object from the payload\nvar date = new Date();\n// Change the payload to be a formatted Date string\nvar hours   = date.getHours();\nvar minutes = date.getMinutes();\n// Return the message so it can be sent on\n//When returning JSON \n//the following format must be used\n//{\"time\" : \"hh:mm\"}\nvar output  = (\"0\" + hours).slice(-2) + ':' + (\"0\" + minutes).slice(-2);\nglobal.set('time1',output);\noutput = \"{\\\"time\\\" :\" + output + \"}\"\nmsg.payload = output;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 40,
+        "wires": [
+            [
+                "496322a4.ce5ebc",
+                "27937915.ea5c96"
+            ]
+        ]
+    },
+    {
+        "id": "27937915.ea5c96",
+        "type": "http response",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "c46d3c9c.b2e3d",
+        "type": "http in",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "url": "/random",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "ce14340d.b37278"
+            ]
+        ]
+    },
+    {
+        "id": "b1e9a754.bd2a38",
+        "type": "http response",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 550,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "496322a4.ce5ebc",
+        "type": "debug",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 330,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "56e35f4c.1e88e",
+        "type": "debug",
+        "z": "ef96b45d.06e6a8",
+        "name": "random",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 420,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "53d8513b.0a207",
+        "type": "function",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "func": "//When returning JSON \n//the following format must be used\n//{\"random\" : \"number\"}\nvar date = new Date();\nvar hours   = date.getHours();\nvar minutes = date.getMinutes();\nvar output  = (\"0\" + hours).slice(-2) + ':' + (\"0\" + minutes).slice(-2);\nglobal.set('time2',output);\nglobal.set('number',msg.payload);\nmsg.payload = \"{\\\"random\\\" : \"+ msg.payload + \"}\"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "56e35f4c.1e88e",
+                "b1e9a754.bd2a38"
+            ]
+        ]
+    },
+    {
+        "id": "7e426c62.475df4",
+        "type": "http in",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "url": "/page",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 300,
+        "wires": [
+            [
+                "c9c0a92d.7c5ae8"
+            ]
+        ]
+    },
+    {
+        "id": "399aad49.30cab2",
+        "type": "http response",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 570,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c9c0a92d.7c5ae8",
+        "type": "function",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "func": "var time1 = global.get('time1');\nvar time2 = global.get('time2');\nvar number = global.get('number');\n\n//msg.payload = \"Time last server time request received at \" + time1 + \"\\n\\nLast random number request returned \"+ number+ \", which was received at \" + time2;\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 250,
+        "y": 300,
+        "wires": [
+            [
+                "22ae2bed.062ab4",
+                "6733bf74.58433"
+            ]
+        ]
+    },
+    {
+        "id": "22ae2bed.062ab4",
+        "type": "debug",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 430,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "6733bf74.58433",
+        "type": "template",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Time last server time request received at {{global.time1}}. \n<br>\n\nLast random number request returned {{ global.number}}, which was received at {{global.time2}};\n",
+        "output": "str",
+        "x": 420,
+        "y": 300,
+        "wires": [
+            [
+                "399aad49.30cab2"
+            ]
+        ]
+    },
+    {
+        "id": "534682d8.a45b9c",
+        "type": "comment",
+        "z": "ef96b45d.06e6a8",
+        "name": "",
+        "info": "L'applicazione:\n\ncrea una pagina /time che visualizza l'orario (del server) in cui è stata fatta l'ultima request della pagina \n\ncrea una pagina /random che visualizza un numero casuale da 1 a 10\n\ncrea una pagina /page che mostra:\nl'orario in cui è stata fatta l'ultima request della pagina /time;\nil numero casuale e l'orario dell'ultima request della pagina /random\nGli orari e il numero casuale sono stati memorizzati come variabili global",
+        "x": 120,
+        "y": 440,
+        "wires": []
+    }
+]
