@@ -1,1 +1,232 @@
-[{"id":"77895961.a3a358","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"86c2b18b.43db4","type":"http in","z":"77895961.a3a358","name":"","url":"/quiz","method":"get","upload":false,"swaggerDoc":"","x":100,"y":60,"wires":[["854897db.4ce488"]]},{"id":"854897db.4ce488","type":"template","z":"77895961.a3a358","name":"page","field":"payload","fieldType":"msg","format":"handlebars","syntax":"plain","template":"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <title>Quiz conosci node-red</title>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\">\n  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>\n  <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\"></script>\n</head>\n<body>\n<h2 class=\"bg-primary text-white\">Quiz</h2>\n<div class=\"container\">\n\n  \n\n  <p>Conosci node red?</p>\n  <p>Tra queste cose, cosa si puo' realizzare usando node red?</p>\n  <p>Quando hai terminato clicca sul pulsante blu per vedere l'avanzamento del voto.</p>\n  <form action=../result method=post>\n    <div class=\"form-group\">\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check1\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check1\" name=\"iot\" value=\"1\" >Accendere e spegnere luci\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check3\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check3\" name=\"game\" value=\"1\">Programmare un videogioco\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check2\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check2\" name=\"web\" value=\"1\">Pubblicare (servire) una pagina web\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check4\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check4\" name=\"scraping\" value=\"1\">Controllare un articolo su un sito web e ricevere una notifica quando il prezzo di qualcosa scende\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check5\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check5\" name=\"robot\" value=\"1\">Controllare un robot fatto con arduino\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check6\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check6\" name=\"geo\" value=\"1\">Visualizzare dati su una mappa\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check7\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check7\" name=\"foto\" value=\"1\">Scattare una foto\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check8\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check8\" name=\"chat\" value=\"1\">Chattare con un bot\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check9\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check9\" name=\"model3D\" value=\"1\">Creare un modello 3D\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check10\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check10\" name=\"quiz\" value=\"1\">Creare pagine web per fare un quiz\n      </label>\n    </div>\n    <div class=\"form-check\">\n      <label class=\"form-check-label\" for=\"check11\">\n        <input type=\"checkbox\" class=\"form-check-input\" id=\"check11\" name=\"flight\" value=\"1\">Ricevere una notifica in caso di collisione aerea sopra casa\n      </label>\n    </div>\n   </div>\n\n       <p><button type=\"submit\" class=\"btn btn-primary\">Invia il tuo voto!</button></p>\n  </form>\n\n</div>\n\n</body>\n</html>","x":510,"y":60,"wires":[["1b944031.213ac"]]},{"id":"1b944031.213ac","type":"http response","z":"77895961.a3a358","name":"","x":650,"y":60,"wires":[]},{"id":"1cdec104.e7d43f","type":"http in","z":"77895961.a3a358","name":"","url":"/result","method":"post","upload":false,"swaggerDoc":"","x":90,"y":260,"wires":[["133e4d32.790c33","c383343e.690248"]]},{"id":"94ee0127.b4196","type":"template","z":"77895961.a3a358","name":"page","field":"payload","fieldType":"msg","format":"handlebars","syntax":"plain","template":"<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <title>Quiz conosci node-red</title>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css\">\n  <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js\"></script>\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>\n  <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\"></script>\n</head>\n<body>\n  <div class=\"container\">\n    <h2>Quiz</h2>    \n    <script>location.href = (\"../ui/\");</script>\n  </div>\n</body>\n</html>","x":510,"y":260,"wires":[["487b1981.4ec018"]]},{"id":"487b1981.4ec018","type":"http response","z":"77895961.a3a358","name":"","x":650,"y":260,"wires":[]},{"id":"c383343e.690248","type":"debug","z":"77895961.a3a358","name":"","active":true,"tosidebar":true,"console":false,"tostatus":false,"complete":"true","targetType":"full","x":250,"y":300,"wires":[]},{"id":"133e4d32.790c33","type":"function","z":"77895961.a3a358","name":"responses_to_chart_var","func":"var iot = flow.get(\"iot\") || 0; \nvar game = flow.get(\"game\") || 0; \nvar web = flow.get(\"web\") || 0; \nvar scraping = flow.get(\"scraping\") || 0;\nvar robot = flow.get(\"robot\") || 0; \nvar geo = flow.get(\"geo\") || 0; \nvar foto = flow.get(\"foto\") || 0; \nvar chat = flow.get(\"chat\") || 0; \nvar model3D = flow.get(\"model3D\") || 0; \nvar quiz = flow.get(\"quiz\") || 0; \nvar flight = flow.get(\"flight\") || 0;\nif (msg.payload.iot) { iot+=parseInt(msg.payload.iot);} \nif (msg.payload.game) { game+=parseInt(msg.payload.game);} \nif (msg.payload.web) { web+=parseInt(msg.payload.web);}\nif (msg.payload.scraping) { scraping+=parseInt(msg.payload.scraping);} \nif (msg.payload.robot) { robot+=parseInt(msg.payload.robot);} \nif (msg.payload.geo) { geo+=parseInt(msg.payload.geo);}\nif (msg.payload.foto) { foto+=parseInt(msg.payload.foto);}\nif (msg.payload.chat) { chat+=parseInt(msg.payload.chat);} \nif (msg.payload.model3D) { model3D+=parseInt(msg.payload.model3D);}\nif (msg.payload.quiz) { quiz+=parseInt(msg.payload.quiz);}\nif (msg.payload.flight) { flight+=parseInt(msg.payload.flight);}\n\nflow.set([\"iot\",\"game\",\"web\",\"scraping\",\"robot\",\"geo\",\"foto\",\"chat\",\"model3D\",\"quiz\",\"flight\"],[iot,game,web,scraping,robot,geo,foto,chat,model3D,quiz,flight])\nmsg.payload=[{\n    \"series\": [\"iot\",\"game\",\"web\",\"scraping\",\"robot\",\"geo\",\"foto\",\"chat\",\"model3D\",\"quiz\",\"flight\"],\n    \"data\": [[iot,game,web,scraping,robot,geo,foto,chat,model3D,quiz,flight]],\n    \"labels\": [\"Controllo luci\", \"Videogioco\",\"Pagina web\",\"Notifica prezzo\",\"Robot con arduino\",\"Mappa\",\"Scattare una foto\",\"Chatbot\",\"Modello 3D\",\"Fare un quiz\",\"Notifica collisione aerea\"]\n}];\nreturn msg;","outputs":1,"noerr":0,"x":310,"y":260,"wires":[["94ee0127.b4196","54807d27.44f314"]]},{"id":"d4f2ea08.cb03c8","type":"inject","z":"77895961.a3a358","name":"","topic":"","payload":"","payloadType":"date","repeat":"","crontab":"","once":false,"onceDelay":0.1,"x":100,"y":220,"wires":[["133e4d32.790c33"]]},{"id":"54807d27.44f314","type":"ui_chart","z":"77895961.a3a358","name":"","group":"ad44da6a.dc17e8","order":1,"width":0,"height":0,"label":"","chartType":"horizontalBar","legend":"false","xformat":"HH:mm:ss","interpolate":"linear","nodata":"In attesa di dati...","dot":false,"ymin":"","ymax":"","removeOlder":1,"removeOlderPoints":"","removeOlderUnit":"3600","cutout":0,"useOneColor":false,"colors":["#1f77b4","#aec7e8","#ff7f0e","#2ca02c","#98df8a","#d62728","#ff9896","#9467bd","#c5b0d5"],"useOldStyle":false,"outputs":1,"x":510,"y":300,"wires":[[]]},{"id":"d2489aa4.a252a8","type":"comment","z":"77895961.a3a358","name":"Pagina_domande","info":"","x":850,"y":60,"wires":[]},{"id":"355b3767.f1cc28","type":"comment","z":"77895961.a3a358","name":"Elaborazione risposte e grafico","info":"","x":890,"y":260,"wires":[]},{"id":"ad44da6a.dc17e8","type":"ui_group","z":"","name":"Risultati","tab":"eee304f4.b65828","order":1,"disp":true,"width":"10","collapse":false},{"id":"eee304f4.b65828","type":"ui_tab","z":"","name":"Quiz","icon":"dashboard","order":2,"disabled":false,"hidden":false}]
+{
+id: "77895961.a3a358",
+type: "tab",
+label: "Flow 1",
+disabled: false,
+info: ""
+},
+{
+id: "86c2b18b.43db4",
+type: "http in",
+z: "77895961.a3a358",
+name: "",
+url: "/quiz",
+method: "get",
+upload: false,
+swaggerDoc: "",
+x: 100,
+y: 60,
+wires: [
+[
+"854897db.4ce488"
+]
+]
+},
+{
+id: "854897db.4ce488",
+type: "template",
+z: "77895961.a3a358",
+name: "page",
+field: "payload",
+fieldType: "msg",
+format: "handlebars",
+syntax: "plain",
+template: "<!DOCTYPE html> <html lang="en"> <head> <title>Quiz conosci node-red</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> </head> <body> <h2 class="bg-primary text-white">Quiz</h2> <div class="container"> <p>Conosci node red?</p> <p>Tra queste cose, cosa si puo' realizzare usando node red?</p> <p>Quando hai terminato clicca sul pulsante blu per vedere l'avanzamento del voto.</p> <form action=../result method=post> <div class="form-group"> <div class="form-check"> <label class="form-check-label" for="check1"> <input type="checkbox" class="form-check-input" id="check1" name="iot" value="1" >Accendere e spegnere luci </label> </div> <div class="form-check"> <label class="form-check-label" for="check3"> <input type="checkbox" class="form-check-input" id="check3" name="game" value="1">Programmare un videogioco </label> </div> <div class="form-check"> <label class="form-check-label" for="check2"> <input type="checkbox" class="form-check-input" id="check2" name="web" value="1">Pubblicare (servire) una pagina web </label> </div> <div class="form-check"> <label class="form-check-label" for="check4"> <input type="checkbox" class="form-check-input" id="check4" name="scraping" value="1">Controllare un articolo su un sito web e ricevere una notifica quando il prezzo di qualcosa scende </label> </div> <div class="form-check"> <label class="form-check-label" for="check5"> <input type="checkbox" class="form-check-input" id="check5" name="robot" value="1">Controllare un robot fatto con arduino </label> </div> <div class="form-check"> <label class="form-check-label" for="check6"> <input type="checkbox" class="form-check-input" id="check6" name="geo" value="1">Visualizzare dati su una mappa </label> </div> <div class="form-check"> <label class="form-check-label" for="check7"> <input type="checkbox" class="form-check-input" id="check7" name="foto" value="1">Scattare una foto </label> </div> <div class="form-check"> <label class="form-check-label" for="check8"> <input type="checkbox" class="form-check-input" id="check8" name="chat" value="1">Chattare con un bot </label> </div> <div class="form-check"> <label class="form-check-label" for="check9"> <input type="checkbox" class="form-check-input" id="check9" name="model3D" value="1">Creare un modello 3D </label> </div> <div class="form-check"> <label class="form-check-label" for="check10"> <input type="checkbox" class="form-check-input" id="check10" name="quiz" value="1">Creare pagine web per fare un quiz </label> </div> <div class="form-check"> <label class="form-check-label" for="check11"> <input type="checkbox" class="form-check-input" id="check11" name="flight" value="1">Ricevere una notifica in caso di collisione aerea sopra casa </label> </div> </div> <p><button type="submit" class="btn btn-primary">Invia il tuo voto!</button></p> </form> </div> </body> </html>",
+x: 510,
+y: 60,
+wires: [
+[
+"1b944031.213ac"
+]
+]
+},
+{
+id: "1b944031.213ac",
+type: "http response",
+z: "77895961.a3a358",
+name: "",
+x: 650,
+y: 60,
+wires: [ ]
+},
+{
+id: "1cdec104.e7d43f",
+type: "http in",
+z: "77895961.a3a358",
+name: "",
+url: "/result",
+method: "post",
+upload: false,
+swaggerDoc: "",
+x: 90,
+y: 260,
+wires: [
+[
+"133e4d32.790c33",
+"c383343e.690248"
+]
+]
+},
+{
+id: "94ee0127.b4196",
+type: "template",
+z: "77895961.a3a358",
+name: "page",
+field: "payload",
+fieldType: "msg",
+format: "handlebars",
+syntax: "plain",
+template: "<!DOCTYPE html> <html lang="en"> <head> <title>Quiz conosci node-red</title> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> </head> <body> <div class="container"> <h2>Quiz</h2> <script>location.href = ("../ui/");</script> </div> </body> </html>",
+x: 510,
+y: 260,
+wires: [
+[
+"487b1981.4ec018"
+]
+]
+},
+{
+id: "487b1981.4ec018",
+type: "http response",
+z: "77895961.a3a358",
+name: "",
+x: 650,
+y: 260,
+wires: [ ]
+},
+{
+id: "c383343e.690248",
+type: "debug",
+z: "77895961.a3a358",
+name: "",
+active: true,
+tosidebar: true,
+console: false,
+tostatus: false,
+complete: "true",
+targetType: "full",
+x: 250,
+y: 300,
+wires: [ ]
+},
+{
+id: "133e4d32.790c33",
+type: "function",
+z: "77895961.a3a358",
+name: "responses_to_chart_var",
+func: "var iot = flow.get("iot") || 0; var game = flow.get("game") || 0; var web = flow.get("web") || 0; var scraping = flow.get("scraping") || 0; var robot = flow.get("robot") || 0; var geo = flow.get("geo") || 0; var foto = flow.get("foto") || 0; var chat = flow.get("chat") || 0; var model3D = flow.get("model3D") || 0; var quiz = flow.get("quiz") || 0; var flight = flow.get("flight") || 0; if (msg.payload.iot) { iot+=parseInt(msg.payload.iot);} if (msg.payload.game) { game+=parseInt(msg.payload.game);} if (msg.payload.web) { web+=parseInt(msg.payload.web);} if (msg.payload.scraping) { scraping+=parseInt(msg.payload.scraping);} if (msg.payload.robot) { robot+=parseInt(msg.payload.robot);} if (msg.payload.geo) { geo+=parseInt(msg.payload.geo);} if (msg.payload.foto) { foto+=parseInt(msg.payload.foto);} if (msg.payload.chat) { chat+=parseInt(msg.payload.chat);} if (msg.payload.model3D) { model3D+=parseInt(msg.payload.model3D);} if (msg.payload.quiz) { quiz+=parseInt(msg.payload.quiz);} if (msg.payload.flight) { flight+=parseInt(msg.payload.flight);} flow.set(["iot","game","web","scraping","robot","geo","foto","chat","model3D","quiz","flight"],[iot,game,web,scraping,robot,geo,foto,chat,model3D,quiz,flight]) msg.payload=[{ "series": ["iot","game","web","scraping","robot","geo","foto","chat","model3D","quiz","flight"], "data": [[iot,game,web,scraping,robot,geo,foto,chat,model3D,quiz,flight]], "labels": ["Controllo luci", "Videogioco","Pagina web","Notifica prezzo","Robot con arduino","Mappa","Scattare una foto","Chatbot","Modello 3D","Fare un quiz","Notifica collisione aerea"] }]; return msg;",
+outputs: 1,
+noerr: 0,
+x: 310,
+y: 260,
+wires: [
+[
+"94ee0127.b4196",
+"54807d27.44f314"
+]
+]
+},
+{
+id: "d4f2ea08.cb03c8",
+type: "inject",
+z: "77895961.a3a358",
+name: "",
+topic: "",
+payload: "",
+payloadType: "date",
+repeat: "",
+crontab: "",
+once: false,
+onceDelay: 0.1,
+x: 100,
+y: 220,
+wires: [
+[
+"133e4d32.790c33"
+]
+]
+},
+{
+id: "54807d27.44f314",
+type: "ui_chart",
+z: "77895961.a3a358",
+name: "",
+group: "ad44da6a.dc17e8",
+order: 1,
+width: 0,
+height: 0,
+label: "",
+chartType: "horizontalBar",
+legend: "false",
+xformat: "HH:mm:ss",
+interpolate: "linear",
+nodata: "In attesa di dati...",
+dot: false,
+ymin: "",
+ymax: "",
+removeOlder: 1,
+removeOlderPoints: "",
+removeOlderUnit: "3600",
+cutout: 0,
+useOneColor: false,
+colors: [
+"#1f77b4",
+"#aec7e8",
+"#ff7f0e",
+"#2ca02c",
+"#98df8a",
+"#d62728",
+"#ff9896",
+"#9467bd",
+"#c5b0d5"
+],
+useOldStyle: false,
+outputs: 1,
+x: 510,
+y: 300,
+wires: [
+[ ]
+]
+},
+{
+id: "d2489aa4.a252a8",
+type: "comment",
+z: "77895961.a3a358",
+name: "Pagina_domande",
+info: "",
+x: 850,
+y: 60,
+wires: [ ]
+},
+{
+id: "355b3767.f1cc28",
+type: "comment",
+z: "77895961.a3a358",
+name: "Elaborazione risposte e grafico",
+info: "",
+x: 890,
+y: 260,
+wires: [ ]
+},
+{
+id: "ad44da6a.dc17e8",
+type: "ui_group",
+z: "",
+name: "Risultati",
+tab: "eee304f4.b65828",
+order: 1,
+disp: true,
+width: "10",
+collapse: false
+},
+{
+id: "eee304f4.b65828",
+type: "ui_tab",
+z: "",
+name: "Quiz",
+icon: "dashboard",
+order: 2,
+disabled: false,
+hidden: false
+}
+]
